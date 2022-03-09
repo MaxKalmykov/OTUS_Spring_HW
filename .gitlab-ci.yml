@@ -6,7 +6,7 @@
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 variables:
- -SAST_JAVA_VERSION: 11
+ SAST_JAVA_VERSION: '11'
 stages:
 - test
 sast:
