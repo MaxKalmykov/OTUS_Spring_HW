@@ -12,8 +12,12 @@ import java.util.Scanner;
 @ToString
 public class StudentService {
 
+    private Scanner scanner;
+    public StudentService() {
+        this.scanner = new Scanner(System.in);
+    }
+
     private String setStudentData(String dataName){
-        Scanner scanner = new Scanner(System.in);
         StringBuilder s = new StringBuilder();
         System.out.println("Enter your " + dataName + ":");
         s.append(scanner.nextLine());
