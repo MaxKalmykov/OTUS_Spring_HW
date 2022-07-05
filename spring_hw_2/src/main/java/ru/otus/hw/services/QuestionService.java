@@ -1,11 +1,14 @@
 package ru.otus.hw.services;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.otus.hw.entities.Question;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class QuestionService {
     public @NotNull String printQuestion(Question question){
         StringBuilder res = new StringBuilder();

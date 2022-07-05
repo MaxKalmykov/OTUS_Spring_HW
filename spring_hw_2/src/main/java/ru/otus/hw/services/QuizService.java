@@ -1,6 +1,7 @@
 package ru.otus.hw.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.otus.hw.entities.QuestionResult;
 import ru.otus.hw.entities.Question;
 import ru.otus.hw.entities.Student;
@@ -59,10 +60,11 @@ public class QuizService {
             }
             questionResultService.add(i, question, s.toString());
         }
-        System.out.println(printQuizResult(questionResultService.getResults()));
+        System.out.println(printQuizResult());
     }
 
-    private String printQuizResult(List<QuestionResult> quizProcessMap){
+    private String printQuizResult(){
+        List<QuestionResult> quizProcessMap = questionResultService.getResults();
         StringBuilder res = new StringBuilder();
         res.append("Quiz completed.").append("\n");
         res.append("Quiz result:").append("\n");

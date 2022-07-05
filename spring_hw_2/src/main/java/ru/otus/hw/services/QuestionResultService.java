@@ -1,11 +1,13 @@
 package ru.otus.hw.services;
 
+import org.springframework.stereotype.Service;
 import ru.otus.hw.entities.Question;
 import ru.otus.hw.entities.QuestionResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class QuestionResultService {
     private final List<QuestionResult> questionResultList = new ArrayList<>();
 

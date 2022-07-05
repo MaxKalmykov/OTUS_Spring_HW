@@ -1,18 +1,16 @@
 package ru.otus.hw.entities;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
 @ToString
 public class QuestionResult {
 
-    private int questionNumber;
-    private Question question;
-    private String answerText;
-    private boolean answerCorrect;
+    private final int questionNumber;
+    private final Question question;
+    private final String answerText;
+    private final boolean answerCorrect;
 
     public QuestionResult(int questionNumber, Question question, String answerText, boolean answerCorrect) {
         this.questionNumber = questionNumber;
