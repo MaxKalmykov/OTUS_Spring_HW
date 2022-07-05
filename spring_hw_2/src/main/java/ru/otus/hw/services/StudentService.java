@@ -3,13 +3,13 @@ package ru.otus.hw.services;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 import ru.otus.hw.entities.Student;
 
 import java.util.Scanner;
 
-@Getter
-@Setter
 @ToString
+@Service
 public class StudentService {
 
     private Scanner scanner;
