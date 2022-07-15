@@ -21,6 +21,7 @@ import ru.otus.hw.services.QuizServiceImpl;
 @ComponentScan("ru.otus.hw")
 public class AppConfig {
 
+    //TODO: Никак не хочет перебивать настройки MessageSource из автоконфигурации настройками из yml, поэтому пришлось самому создавать бин
     @Bean
     public MessageSource messageSource(@Value("${spring.messages.basename}") String basename,
                                        @Value("${spring.messages.encoding}") String encoding) {
