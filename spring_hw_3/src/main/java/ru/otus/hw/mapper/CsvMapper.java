@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class CsvMapper implements Mapper {
-    private InputStream csvStream;
+    private final InputStream csvStream;
 
     public CsvMapper(InputStream csvStream) {
         this.csvStream = csvStream;

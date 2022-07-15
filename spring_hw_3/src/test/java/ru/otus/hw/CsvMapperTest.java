@@ -15,12 +15,10 @@ import java.util.List;
 @DisplayName("Проверка маппера документа с вопросами")
 public class CsvMapperTest {
 
-    private InputStream mockInputStream;
-
     @Test
     @DisplayName("Корректный маппинг тестового файла")
     void shouldHaveCorrectMapping() {
-        mockInputStream = new ByteArrayInputStream(";QUESTION_TEXT;ANSWER_1;ANSWER_2;ANSWER_3;ANSWER_4;RIGHT_ANSWER\n;Test question;Test answer1;Test answer2;Test answer3;Test answer4;Test answer2".getBytes());
+        InputStream mockInputStream = new ByteArrayInputStream(";QUESTION_TEXT;ANSWER_1;ANSWER_2;ANSWER_3;ANSWER_4;RIGHT_ANSWER\n;Test question;Test answer1;Test answer2;Test answer3;Test answer4;Test answer2".getBytes());
         CsvMapper csvMapper = new CsvMapper(mockInputStream);
         List<Question> questions = csvMapper.getQuestions();
         Question question = questions.get(0);

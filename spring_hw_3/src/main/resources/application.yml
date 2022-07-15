@@ -5,4 +5,4 @@ spring:
 
 quiz:
   min-success-answers-count: 4
-  locale: en
+  locale: ru

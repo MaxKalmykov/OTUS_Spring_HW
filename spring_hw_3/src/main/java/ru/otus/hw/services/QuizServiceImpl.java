@@ -20,16 +20,16 @@ public class QuizServiceImpl implements QuizService{
     public void startQuiz(Student student) {
         Scanner scanner = new Scanner(System.in);
         StringBuilder s = new StringBuilder();
-        System.out.println("Welcome to quiz " + student.getLastName() + " " + student.getFirstName());
-        System.out.println("Let's do it!");
+        System.out.println(messagePrinter.getMessage("quiz.welcome") + " " + student.getLastName() + " " + student.getFirstName());
+        System.out.println(messagePrinter.getMessage("quiz.lets"));
         for (int i = 1; i <= questions.size(); i++) {
             Question question = questions.get(i-1);
-            System.out.println("Enter your answer:");
-            System.out.println("Question number:" + i);
+            System.out.println(messagePrinter.getMessage("quiz.enter-answer"));
+            System.out.println(messagePrinter.getMessage("quiz.question-number") + i);
             System.out.println(questionService.printQuestion(question));
             s.delete(0, s.length());
             while (s.toString().trim().length() <= 0) {
-                System.out.println("Enter your answer:");
+                System.out.println(messagePrinter.getMessage("quiz.enter-answer"));
                 s.append(scanner.nextLine());
                 if (question.isQuestionTypeWithAnswerOption()) {
                     try{
@@ -42,7 +42,7 @@ public class QuizServiceImpl implements QuizService{
                     }
                 }
                 if (s.length() == 0){
-                    System.out.println("Incorrect answer! Try again.");
+                    System.out.println(messagePrinter.getMessage("quiz.incorrect-answer"));
                 }
             }
             questionResultService.add(i, question, s.toString());
@@ -53,21 +53,21 @@ public class QuizServiceImpl implements QuizService{
     private String printQuizResult(){
         List<QuestionResult> quizProcessMap = questionResultService.getResults();
         StringBuilder res = new StringBuilder();
-        res.append("Quiz completed.").append("\n");
-        res.append("Quiz result:").append("\n");
+        res.append(messagePrinter.getMessage("quiz.completed")).append("\n");
+        res.append(messagePrinter.getMessage("quiz.result")).append("\n");
         for (QuestionResult questionResult : quizProcessMap) {
             Question q = questionResult.getQuestion();
-            res.append("Question number:").append(questionResult.getQuestionNumber()).append("\n");
-            res.append("--Right answer is: ").append(q.getRightAnswer()).append("\n");
-            res.append("--Your answer is: ").append(questionResult.getAnswerText()).append("\n");
-            res.append("--Question result: ").append(questionResult.isAnswerCorrect() ? "SUCCESS" : "FAIL").append("\n");
+            res.append(messagePrinter.getMessage("quiz.question-number")).append(questionResult.getQuestionNumber()).append("\n");
+            res.append("--").append(messagePrinter.getMessage("quiz.right-answer")).append(" ").append(q.getRightAnswer()).append("\n");
+            res.append("--").append(messagePrinter.getMessage("quiz.your-answer")).append(" ").append(questionResult.getAnswerText()).append("\n");
+            res.append("--").append(messagePrinter.getMessage("quiz.question-result")).append(" ").append(questionResult.isAnswerCorrect() ? messagePrinter.getMessage("quiz.success") : messagePrinter.getMessage("quiz.fail")).append("\n");
         }
         res.append("======================================").append("\n");
-        res.append("Quiz result: ");
+        res.append(messagePrinter.getMessage("quiz.result")).append(" ");
         if (quizProcessMap.stream().filter(QuestionResult::isAnswerCorrect).count() >= MIN_SUCCESS_ANSWERS_COUNT) {
-            res.append("SUCCESS! Congratulations!");
+            res.append(messagePrinter.getMessage("quiz.complete.success"));
         } else {
-            res.append("FAIL, sorry :'(");
+            res.append(messagePrinter.getMessage("quiz.complete-fail"));
         }
         return res.toString();
     }

@@ -1,10 +1,12 @@
 package ru.otus.hw.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import ru.otus.hw.loader.FileLoader;
 import ru.otus.hw.loader.Loader;
 import ru.otus.hw.mapper.CsvMapper;
@@ -15,8 +17,20 @@ import ru.otus.hw.services.QuestionService;
 import ru.otus.hw.services.QuizServiceImpl;
 
 @Configuration
+@EnableConfigurationProperties(ConfigurationProperties.class)
 @ComponentScan("ru.otus.hw")
 public class AppConfig {
+
+    @Bean
+    public MessageSource messageSource(@Value("${spring.messages.basename}") String basename,
+                                       @Value("${spring.messages.encoding}") String encoding) {
+        ReloadableResourceBundleMessageSource messageSource
+                = new ReloadableResourceBundleMessageSource();
+
+        messageSource.setBasename(basename);
+        messageSource.setDefaultEncoding(encoding);
+        return messageSource;
+    }
 
     @Bean
     public MessagePrinter messagePrinter(MessageSource messageSource, @Value("${quiz.locale}") String locale) {

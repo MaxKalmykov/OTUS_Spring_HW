@@ -21,10 +21,10 @@ public class StudentServiceImpl implements StudentService{
 
     private String setStudentData(String dataName){
         StringBuilder s = new StringBuilder();
-        System.out.println("Enter your " + dataName + ":");
+        System.out.println(messagePrinter.getMessage("student.enter") + " " + dataName + ":");
         s.append(scanner.nextLine());
         while (s.toString().trim().length() <= 0) {
-            System.out.println("Incorrect " + dataName + "! Try again.");
+            System.out.println(messagePrinter.getMessage("student.incorrect") + " " + dataName + "! " + messagePrinter.getMessage("student.try-again"));
             s.delete(0, s.length());
             s.append(scanner.nextLine());
         }
@@ -33,8 +33,8 @@ public class StudentServiceImpl implements StudentService{
     public Student initStudent(){
         String lastName;
         String firstName;
-        lastName = setStudentData("last name");
-        firstName = setStudentData("first name");
+        lastName = setStudentData(messagePrinter.getMessage("student.last-name"));
+        firstName = setStudentData(messagePrinter.getMessage("student.first-name"));
 
         return new Student(lastName, firstName);
     }
