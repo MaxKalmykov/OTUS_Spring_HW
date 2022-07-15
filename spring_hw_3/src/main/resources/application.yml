@@ -1,0 +1,8 @@
+spring:
+  messages:
+    basename: classpath:i18n/messages
+    encoding: UTF-8
+
+quiz:
+  min-success-answers-count: 4
+  locale: ru
