@@ -43,7 +43,7 @@ public class BookCommentRepositoryImpl implements BookCommentRepository{
 
     @Override
     public List<BookComment> findAllByBook(Book book) {
-        return em.createQuery("select bc from BookComment bc join fetch Book b where b.id = :id", BookComment.class)
+        return em.createQuery("select bc from BookComment bc join fetch Book b on bc.book.id = b.id where b.id = :id", BookComment.class)
                 .setParameter("id", book.getId())
                 .getResultList();
     }

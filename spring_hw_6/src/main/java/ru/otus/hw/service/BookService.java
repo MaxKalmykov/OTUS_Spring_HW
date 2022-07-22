@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.otus.hw.entity.Book;
 import ru.otus.hw.repository.BookRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,6 +39,7 @@ public class BookService {
         return repository.count();
     }
 
+    @Transactional
     public void save(Book book) throws RuntimeException {
         if (book.getName() == null || Objects.equals(book.getName(), "")) {
             throw new RuntimeException("Book name can't be empty");
@@ -51,6 +53,7 @@ public class BookService {
         repository.save(book);
     }
 
+    @Transactional
     public void removeById(Long id) {
         if (id == 0) {
             throw new RuntimeException("Book id can't be empty!");
@@ -58,6 +61,7 @@ public class BookService {
         repository.removeById(id);
     }
 
+    @Transactional
     public void removeAll() {
         repository.removeAll();
     }
