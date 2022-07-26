@@ -9,15 +9,11 @@ import java.util.Scanner;
 
 @ToString
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService{
 
     private final Scanner scanner;
     private final MessagePrinter messagePrinter;
-
-    public StudentServiceImpl(MessagePrinter messagePrinter) {
-        this.scanner = new Scanner(System.in);
-        this.messagePrinter = messagePrinter;
-    }
 
     private String setStudentData(String dataName){
         StringBuilder s = new StringBuilder();
@@ -30,6 +26,8 @@ public class StudentServiceImpl implements StudentService{
         }
         return s.toString();
     }
+
+    @Override
     public Student initStudent(){
         String lastName;
         String firstName;

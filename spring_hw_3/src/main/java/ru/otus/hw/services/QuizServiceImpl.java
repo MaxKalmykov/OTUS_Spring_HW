@@ -1,24 +1,49 @@
 package ru.otus.hw.services;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import ru.otus.hw.entities.QuestionResult;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import ru.otus.hw.entities.Question;
+import ru.otus.hw.entities.QuestionResult;
 import ru.otus.hw.entities.Student;
+import ru.otus.hw.mapper.Mapper;
 
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
-@RequiredArgsConstructor
+@Service
 public class QuizServiceImpl implements QuizService{
 
-    private final List<Question> questions;
-    private final int MIN_SUCCESS_ANSWERS_COUNT;
+    private final Mapper questionsMapper;
+    private final int minSuccessAnswersCount;
     private final QuestionService questionService;
     private final QuestionResultService questionResultService;
     private final MessagePrinter messagePrinter;
+    private final StudentService studentService;
+    private final Scanner scanner;
 
-    public void startQuiz(Student student) {
-        Scanner scanner = new Scanner(System.in);
+    public QuizServiceImpl(
+            Mapper questionsMapper,
+            @Value("${quiz.min-success-answers-count}") int minSuccessAnswersCount,
+            QuestionService questionService,
+            QuestionResultService questionResultService,
+            MessagePrinter messagePrinter,
+            StudentService studentService,
+            Scanner scanner
+    ) {
+        this.questionsMapper = questionsMapper;
+        this.minSuccessAnswersCount = minSuccessAnswersCount;
+        this.questionService = questionService;
+        this.questionResultService = questionResultService;
+        this.messagePrinter = messagePrinter;
+        this.studentService = studentService;
+        this.scanner = scanner;
+    }
+
+    @Override
+    public void startQuiz() {
+        Student student = studentService.initStudent();
+        List<Question> questions = questionsMapper.getQuestions();
         StringBuilder s = new StringBuilder();
         System.out.println(messagePrinter.getMessage("quiz.welcome") + " " + student.getLastName() + " " + student.getFirstName());
         System.out.println(messagePrinter.getMessage("quiz.lets"));
@@ -64,7 +89,7 @@ public class QuizServiceImpl implements QuizService{
         }
         res.append("======================================").append("\n");
         res.append(messagePrinter.getMessage("quiz.result")).append(" ");
-        if (quizProcessMap.stream().filter(QuestionResult::isAnswerCorrect).count() >= MIN_SUCCESS_ANSWERS_COUNT) {
+        if (quizProcessMap.stream().filter(QuestionResult::isAnswerCorrect).count() >= minSuccessAnswersCount) {
             res.append(messagePrinter.getMessage("quiz.complete.success"));
         } else {
             res.append(messagePrinter.getMessage("quiz.complete-fail"));

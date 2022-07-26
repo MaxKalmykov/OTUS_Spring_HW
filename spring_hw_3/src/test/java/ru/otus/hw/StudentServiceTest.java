@@ -18,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 @SpringBootTest
 @Import(AppConfig.class)
@@ -26,9 +27,6 @@ public class StudentServiceTest {
 
     private InputStream mockInputStream;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
-    private final InputStream originalIn = System.in;
-    private final PrintStream originalOut = System.out;
 
     @Autowired
     private MessageSource messageSource;
@@ -44,9 +42,9 @@ public class StudentServiceTest {
     @DisplayName("Корректный запрос данных студента")
     void shouldHaveCorrectInitStudentData() {
         mockInputStream = new ByteArrayInputStream(" \nTest\n\nTestich".getBytes());
-        System.setIn(mockInputStream);
+        Scanner scanner = new Scanner(mockInputStream);
         System.setOut(new PrintStream(outContent));
-        new StudentServiceImpl(messagePrinter).initStudent();
+        new StudentServiceImpl(scanner, messagePrinter).initStudent();
         Assertions.assertEquals("Enter your last name:" + System.lineSeparator() +
                                         "Incorrect last name! Try again." + System.lineSeparator() +
                                         "Enter your first name:" + System.lineSeparator() +
@@ -57,16 +55,10 @@ public class StudentServiceTest {
     @DisplayName("Корректная инициализация студента")
     void shouldHaveCorrectInitStudent() {
         mockInputStream = new ByteArrayInputStream("Testich\nTest".getBytes());
-        System.setIn(mockInputStream);
-        Student student = new StudentServiceImpl(messagePrinter).initStudent();
+        Scanner scanner = new Scanner(mockInputStream);
+        Student student = new StudentServiceImpl(scanner, messagePrinter).initStudent();
         Assertions.assertEquals("Testich", student.getLastName());
         Assertions.assertEquals("Test", student.getFirstName());
-    }
-
-    @After
-    public void clearSystemIn(){
-        System.setIn(originalIn);
-        System.setOut(originalOut);
     }
 
 }

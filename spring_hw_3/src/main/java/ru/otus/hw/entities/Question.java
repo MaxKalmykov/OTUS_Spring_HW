@@ -1,6 +1,7 @@
 package ru.otus.hw.entities;
 
-import com.opencsv.bean.*;
+import com.opencsv.bean.CsvBindAndJoinByName;
+import com.opencsv.bean.CsvBindByName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
