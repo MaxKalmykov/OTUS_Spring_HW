@@ -13,6 +13,7 @@ public class QuestionServiceImpl implements QuestionService{
 
     private final MessagePrinter messagePrinter;
 
+    @Override
     public String printQuestion(Question question){
         StringBuilder res = new StringBuilder();
         List<String> answers = question.getAnswerList();

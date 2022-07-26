@@ -75,7 +75,7 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <mainClass>ru.spb.cmngate.ptcs.clearingprice.provider.Application</mainClass>
+                    <mainClass>ru.otus.hw.ptcs.MainApp</mainClass>
                 </configuration>
                 <executions>
                     <execution>

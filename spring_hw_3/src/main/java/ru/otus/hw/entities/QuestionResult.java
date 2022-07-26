@@ -1,10 +1,12 @@
 package ru.otus.hw.entities;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
+@RequiredArgsConstructor
 public class QuestionResult {
 
     private final int questionNumber;
@@ -12,10 +14,4 @@ public class QuestionResult {
     private final String answerText;
     private final boolean answerCorrect;
 
-    public QuestionResult(int questionNumber, Question question, String answerText, boolean answerCorrect) {
-        this.questionNumber = questionNumber;
-        this.question = question;
-        this.answerText = answerText;
-        this.answerCorrect = answerCorrect;
-    }
 }

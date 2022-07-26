@@ -11,12 +11,14 @@ import java.util.List;
 public class QuestionResultServiceImpl implements QuestionResultService {
     private final List<QuestionResult> questionResultList = new ArrayList<>();
 
+    @Override
     public void add(int questionNumber, Question question, String answer){
         String answerText = setAnswerText(question, answer);
         boolean answerCorrect = validateAnswer(question, answerText);
         questionResultList.add(new QuestionResult(questionNumber, question, answerText, answerCorrect));
     }
 
+    @Override
     public List<QuestionResult> getResults(){
         return questionResultList;
     }
