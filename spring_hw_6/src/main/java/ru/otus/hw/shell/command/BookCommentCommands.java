@@ -12,6 +12,8 @@ import ru.otus.hw.entity.Book;
 import ru.otus.hw.entity.BookComment;
 import ru.otus.hw.service.BookCommentService;
 import ru.otus.hw.service.BookService;
+import ru.otus.hw.service.ChildService;
+import ru.otus.hw.service.NoCrudService;
 import ru.otus.hw.shell.context.AppContext;
 import ru.otus.hw.shell.context.AppState;
 import ru.otus.hw.shell.util.ShellUtils;
@@ -22,8 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookCommentCommands {
 
-    private final BookCommentService service;
-    private final BookService bookService;
+    private final ChildService<BookComment> service;
+    private final NoCrudService<Book> bookService;
     private final ShellUtils utils;
     private final AppContext context;
 

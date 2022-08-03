@@ -7,7 +7,9 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.shell.table.BorderStyle;
+import ru.otus.hw.entity.Genre;
 import ru.otus.hw.service.GenreService;
+import ru.otus.hw.service.NoCrudService;
 import ru.otus.hw.shell.context.AppContext;
 import ru.otus.hw.shell.util.ShellUtils;
 
@@ -17,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GenreCommands {
 
-    private final GenreService service;
+    private final NoCrudService<Genre> service;
     private final ShellUtils utils;
     private final AppContext context;
 

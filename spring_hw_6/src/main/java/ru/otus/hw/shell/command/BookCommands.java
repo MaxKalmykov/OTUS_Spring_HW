@@ -10,9 +10,7 @@ import org.springframework.shell.table.BorderStyle;
 import ru.otus.hw.entity.Author;
 import ru.otus.hw.entity.Book;
 import ru.otus.hw.entity.Genre;
-import ru.otus.hw.service.AuthorService;
-import ru.otus.hw.service.BookService;
-import ru.otus.hw.service.GenreService;
+import ru.otus.hw.service.*;
 import ru.otus.hw.shell.context.AppContext;
 import ru.otus.hw.shell.context.AppState;
 import ru.otus.hw.shell.util.ShellUtils;
@@ -23,9 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookCommands {
 
-    private final BookService service;
-    private final GenreService genreService;
-    private final AuthorService authorService;
+    private final CrudService<Book> service;
+    private final NoCrudService<Genre> genreService;
+    private final NoCrudService<Author> authorService;
     private final ShellUtils utils;
     private final AppContext context;
 

@@ -7,7 +7,9 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.shell.table.BorderStyle;
+import ru.otus.hw.entity.Author;
 import ru.otus.hw.service.AuthorService;
+import ru.otus.hw.service.NoCrudService;
 import ru.otus.hw.shell.context.AppContext;
 import ru.otus.hw.shell.util.ShellUtils;
 
@@ -17,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorCommands {
 
-    private final AuthorService service;
+    private final NoCrudService<Author> service;
     private final ShellUtils utils;
     private final AppContext context;
 
