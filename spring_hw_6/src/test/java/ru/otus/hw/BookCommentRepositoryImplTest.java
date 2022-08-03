@@ -1,6 +1,5 @@
 package ru.otus.hw;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -146,26 +145,6 @@ class BookCommentRepositoryImplTest {
         long count = repository.count();
         repository.removeById(DEFAULT_BOOK_COMMENT_ID);
         assertThat(count - 1).isEqualTo(repository.count());
-    }
-
-    @Test
-    @DisplayName("Удаление всех записей")
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
-    void shouldDeleteAll() {
-        var comment = new BookComment()
-                .setText(DEFAULT_BOOK_COMMENT_TEXT)
-                .setBook(new Book()
-                        .setId(DEFAULT_BOOK_ID)
-                        .setName(DEFAULT_BOOK_NAME)
-                        .setAuthor(new Author().setId(DEFAULT_AUTHOR_ID).setName(DEFAULT_AUTHOR_NAME))
-                        .setGenre(new Genre().setId(DEFAULT_GENRE_ID).setName(DEFAULT_GENRE_NAME))
-                );
-
-        repository.save(comment);
-        long count = repository.count();
-        repository.removeAll();
-        assertThat(count).isGreaterThan(0);
-        AssertionsForClassTypes.assertThat(0).isEqualTo(repository.count());
     }
 
     public BookComment getDefaultComment(){

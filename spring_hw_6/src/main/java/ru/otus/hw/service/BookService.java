@@ -12,10 +12,11 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BookService {
+public class BookService implements CrudService<Book> {
 
     private final BookRepository repository;
 
+    @Override
     public Book findById(Long id) throws RuntimeException {
         if (id == 0) {
             throw new RuntimeException("Book id can't be empty!");
@@ -27,6 +28,7 @@ public class BookService {
         }
     }
 
+    @Override
     public List<Book> findAll() throws RuntimeException {
         var list = repository.findAll();
         if (list.size() == 0) {
@@ -35,10 +37,12 @@ public class BookService {
         return list;
     }
 
+    @Override
     public long count() {
         return repository.count();
     }
 
+    @Override
     @Transactional
     public void save(Book book) throws RuntimeException {
         if (book.getName() == null || Objects.equals(book.getName(), "")) {
@@ -53,16 +57,12 @@ public class BookService {
         repository.save(book);
     }
 
+    @Override
     @Transactional
     public void removeById(Long id) {
         if (id == 0) {
             throw new RuntimeException("Book id can't be empty!");
         }
         repository.removeById(id);
-    }
-
-    @Transactional
-    public void removeAll() {
-        repository.removeAll();
     }
 }

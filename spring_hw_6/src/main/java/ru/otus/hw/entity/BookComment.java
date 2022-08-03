@@ -23,7 +23,7 @@ public class BookComment {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(targetEntity = Book.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Book.class)
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Book book;

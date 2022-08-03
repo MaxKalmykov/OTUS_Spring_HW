@@ -51,11 +51,4 @@ public class BookRepositoryImpl implements BookRepository {
     public void removeById(Long id) {
         findById(id).ifPresent(em::remove);
     }
-
-    @SuppressWarnings("SqlWithoutWhere")
-    @Override
-    public void removeAll() {
-        em.createQuery("delete from Book").executeUpdate();
-    }
-
 }

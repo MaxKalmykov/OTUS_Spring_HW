@@ -24,11 +24,11 @@ public class Book {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(targetEntity = ru.otus.hw.entity.Author.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = ru.otus.hw.entity.Author.class)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
-    @ManyToOne(targetEntity = ru.otus.hw.entity.Genre.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = ru.otus.hw.entity.Genre.class)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
 

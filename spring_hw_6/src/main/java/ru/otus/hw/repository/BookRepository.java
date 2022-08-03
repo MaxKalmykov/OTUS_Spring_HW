@@ -11,5 +11,4 @@ public interface BookRepository {
     List<Book> findAll();
     long count();
     void removeById(Long id);
-    void removeAll();
 }

@@ -96,13 +96,6 @@ public class BookCommands {
         return "Book removed successfully";
     }
 
-    @ShellMethod(value = "Remove all books", key = {"book-remove-all"})
-    @ShellMethodAvailability("isAvailable")
-    public String removeAllBooks() {
-        service.removeAll();
-        return "All books removed successfully";
-    }
-
     @ShellMethod(value = "Return books count", key = {"book-get-count"})
     @ShellMethodAvailability("isAvailable")
     public String count() {

@@ -10,9 +10,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AuthorService {
+public class AuthorService implements NoCrudService<Author> {
     private final AuthorRepository dao;
 
+    @Override
     public Author findById(Long id) throws RuntimeException {
         if (id == 0) {
             throw new RuntimeException("Author id can't be empty!");
@@ -24,6 +25,7 @@ public class AuthorService {
         }
     }
 
+    @Override
     public List<Author> findAll() throws RuntimeException {
         var list = dao.findAll();
         if (list.size() == 0) {
@@ -32,6 +34,7 @@ public class AuthorService {
         return list;
     }
 
+    @Override
     public long count() {
         return dao.count();
     }

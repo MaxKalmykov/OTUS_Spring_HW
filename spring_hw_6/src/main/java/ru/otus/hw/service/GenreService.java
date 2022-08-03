@@ -10,10 +10,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class GenreService {
+public class GenreService implements NoCrudService<Genre> {
 
     private final GenreRepository dao;
 
+    @Override
     public Genre findById(Long id) throws RuntimeException {
         if (id == 0) {
             throw new RuntimeException("Genre id can't be empty!");
@@ -25,6 +26,7 @@ public class GenreService {
         }
     }
 
+    @Override
     public List<Genre> findAll() throws RuntimeException {
         var list = dao.findAll();
         if (list.size() == 0) {
@@ -33,6 +35,7 @@ public class GenreService {
         return list;
     }
 
+    @Override
     public long count() {
         return dao.count();
     }

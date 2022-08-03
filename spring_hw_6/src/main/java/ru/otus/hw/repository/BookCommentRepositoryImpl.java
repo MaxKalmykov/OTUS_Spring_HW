@@ -36,17 +36,17 @@ public class BookCommentRepositoryImpl implements BookCommentRepository{
         if (id == null) {
             return Optional.empty();
         }
-        return em.createQuery("select bc from BookComment bc join fetch bc.book where bc.id = :id", BookComment.class)
+        return em.createQuery("select bc from BookComment bc where bc.id = :id", BookComment.class)
                 .setParameter("id", id)
                 .getResultList().stream().findFirst();
     }
 
-    @Override
+/*    @Override
     public List<BookComment> findAllByBook(Book book) {
         return em.createQuery("select bc from BookComment bc join fetch Book b on bc.book.id = b.id where b.id = :id", BookComment.class)
                 .setParameter("id", book.getId())
                 .getResultList();
-    }
+    }*/
 
     @Override
     public long count() {
@@ -61,11 +61,8 @@ public class BookCommentRepositoryImpl implements BookCommentRepository{
 
     @Override
     public void removeAllByBook(Book book) {
-        findAllByBook(book).forEach(em::remove);
-    }
-
-    @Override
-    public void removeAll() {
-        em.createQuery("delete from BookComment").executeUpdate();
+        em.createQuery("delete from BookComment bc where bc.book.id = :id", BookComment.class)
+                        .setParameter("id", book.getId())
+                        .executeUpdate();
     }
 }

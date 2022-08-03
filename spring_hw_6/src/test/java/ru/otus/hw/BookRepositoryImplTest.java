@@ -1,26 +1,20 @@
 package ru.otus.hw;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import ru.otus.hw.entity.BookComment;
-import ru.otus.hw.repository.BookRepository;
-import ru.otus.hw.repository.BookRepositoryImpl;
 import ru.otus.hw.entity.Author;
 import ru.otus.hw.entity.Book;
+import ru.otus.hw.entity.BookComment;
 import ru.otus.hw.entity.Genre;
+import ru.otus.hw.repository.BookRepository;
+import ru.otus.hw.repository.BookRepositoryImpl;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,22 +128,6 @@ class BookRepositoryImplTest {
         long count = repository.count();
         repository.removeById(DEFAULT_BOOK_ID);
         assertThat(count - 1).isEqualTo(repository.count());
-    }
-
-    @Test
-    @DisplayName("Удаление всех записей")
-    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
-    void shouldDeleteAll() {
-        var book = new Book()
-                .setName(SECOND_BOOK_NAME)
-                .setAuthor(new Author().setId(DEFAULT_AUTHOR_ID).setName(DEFAULT_AUTHOR_NAME))
-                .setGenre(new Genre().setId(DEFAULT_GENRE_ID).setName(DEFAULT_GENRE_NAME));
-
-        repository.save(book);
-        long count = repository.count();
-        repository.removeAll();
-        assertThat(count).isGreaterThan(0);
-        AssertionsForClassTypes.assertThat(0).isEqualTo(repository.count());
     }
 
     public BookComment getDefaultComment(){

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import ru.otus.hw.entity.Book;
 import ru.otus.hw.entity.BookComment;
 import ru.otus.hw.repository.BookCommentRepository;
-import ru.otus.hw.repository.BookRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BookCommentService {
+public class BookCommentService implements ChildService<BookComment> {
 
     private final BookCommentRepository repository;
     private final BookService bookService;
@@ -38,9 +37,9 @@ public class BookCommentService {
         return list;
     }
 
-    public List<BookComment> findAllByBook(Long bookId) throws RuntimeException {
+    public List<BookComment> findAllByParent(Long bookId) throws RuntimeException {
         Book book = bookService.findById(bookId);
-        var list = repository.findAllByBook(book);
+        var list = book.getComments();
         if (list.size() == 0) {
             throw new RuntimeException("Book comments list is empty.");
         }
@@ -71,12 +70,7 @@ public class BookCommentService {
     }
 
     @Transactional
-    public void removeAll() {
-        repository.removeAll();
-    }
-
-    @Transactional
-    public void removeAllByBook(Long bookId) throws RuntimeException {
+    public void removeAllByParent(Long bookId) throws RuntimeException {
         Book book = bookService.findById(bookId);
         repository.removeAllByBook(book);
     }

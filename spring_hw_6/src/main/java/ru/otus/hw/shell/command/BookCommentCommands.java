@@ -83,7 +83,7 @@ public class BookCommentCommands {
     @ShellMethod(value = "Get book comment by ID", key = {"comment-get-by-book"})
     @ShellMethodAvailability("isAvailable")
     public String getCommentsByBook(@ShellOption(defaultValue = "0") Long id){
-        return "Book comments: \n" + utils.renderTable(BookCommentEntityToDtoConverter.convert(service.findAllByBook(id)), BorderStyle.oldschool, "text");
+        return "Book comments: \n" + utils.renderTable(BookCommentEntityToDtoConverter.convert(service.findAllByParent(id)), BorderStyle.oldschool, "text");
     }
 
     @ShellMethod(value = "Remove book comment by ID", key = {"comment-remove"})
@@ -93,17 +93,10 @@ public class BookCommentCommands {
         return "Book comment removed successfully";
     }
 
-    @ShellMethod(value = "Remove all books comments", key = {"comment-remove-all"})
-    @ShellMethodAvailability("isAvailable")
-    public String removeAllComments() {
-        service.removeAll();
-        return "All books comments removed successfully";
-    }
-
     @ShellMethod(value = "Get book comment by ID", key = {"comment-remove-by-book"})
     @ShellMethodAvailability("isAvailable")
     public String removeCommentsByBook(@ShellOption(defaultValue = "0") Long id){
-        service.removeAllByBook(id);
+        service.removeAllByParent(id);
         return "Book comments removed successfully!";
     }
 
