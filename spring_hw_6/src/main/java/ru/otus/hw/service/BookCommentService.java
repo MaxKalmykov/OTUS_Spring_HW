@@ -40,6 +40,7 @@ public class BookCommentService implements ChildService<BookComment> {
     }
 
     @Override
+    @Transactional
     public List<BookComment> findAllByParent(Long bookId) throws RuntimeException {
         Book book = bookService.findById(bookId);
         var list = book.getComments();
