@@ -18,6 +18,7 @@ public class BookCommentService implements ChildService<BookComment> {
     private final BookCommentRepository repository;
     private final BookService bookService;
 
+    @Override
     public BookComment findById(Long id) throws RuntimeException {
         if (id == 0) {
             throw new RuntimeException("Book comment id can't be empty!");
@@ -29,6 +30,7 @@ public class BookCommentService implements ChildService<BookComment> {
         }
     }
 
+    @Override
     public List<BookComment> findAll() throws RuntimeException {
         var list = repository.findAll();
         if (list.size() == 0) {
@@ -37,6 +39,7 @@ public class BookCommentService implements ChildService<BookComment> {
         return list;
     }
 
+    @Override
     public List<BookComment> findAllByParent(Long bookId) throws RuntimeException {
         Book book = bookService.findById(bookId);
         var list = book.getComments();
@@ -46,10 +49,12 @@ public class BookCommentService implements ChildService<BookComment> {
         return list;
     }
 
+    @Override
     public long count() {
         return repository.count();
     }
 
+    @Override
     @Transactional
     public void save(BookComment comment) throws RuntimeException {
         if (comment.getText() == null || Objects.equals(comment.getText(), "")) {
@@ -61,6 +66,7 @@ public class BookCommentService implements ChildService<BookComment> {
         repository.save(comment);
     }
 
+    @Override
     @Transactional
     public void removeById(Long id) {
         if (id == 0) {
@@ -69,6 +75,7 @@ public class BookCommentService implements ChildService<BookComment> {
         repository.removeById(id);
     }
 
+    @Override
     @Transactional
     public void removeAllByParent(Long bookId) throws RuntimeException {
         Book book = bookService.findById(bookId);

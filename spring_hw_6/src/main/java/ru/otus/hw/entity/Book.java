@@ -35,7 +35,7 @@ public class Book {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(targetEntity = BookComment.class, mappedBy = "book", orphanRemoval = true)
+    @OneToMany(targetEntity = BookComment.class, mappedBy = "book", orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<BookComment> comments;
 
