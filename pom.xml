@@ -14,6 +14,7 @@
         <module>spring_hw_4</module>
         <module>spring_hw_5</module>
         <module>spring_hw_6</module>
+        <module>spring_hw_7</module>
     </modules>
 
     <properties>
